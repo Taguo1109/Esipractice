@@ -1,0 +1,5 @@
+package tw.taguo.config;
+
+public class DispatcherServletConfig {
+
+}

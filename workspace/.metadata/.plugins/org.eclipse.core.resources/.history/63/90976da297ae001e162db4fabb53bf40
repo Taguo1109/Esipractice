@@ -1,0 +1,23 @@
+package tw.taguo.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.xml.crypto.Data;
+
+@Entity
+@Table(name = "employees")
+public class Employees {
+
+	@Id
+	@Column(name = "EmployeeID")
+	private int id;
+	@Column(name = "LastName")
+	private String lastname;
+	@Column(name = "FirstName")
+	private String firstname;
+	@Column(name = "BirthDate")
+	private Data birthdate;
+
+}

@@ -1,0 +1,5 @@
+package tw.taguo.dao;
+
+public class EmployeesImpl {
+
+}

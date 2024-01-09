@@ -1,0 +1,39 @@
+package tw.taguo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import tw.taguo.model.Employees;
+import tw.taguo.service.EmployeesService;
+
+@Controller
+@RequestMapping("/employees")
+public class EmployeesController {
+
+	@Autowired
+	private EmployeesService employeesService;
+
+	@GetMapping("/search")
+	public String searchEmployeesById(@RequestParam(value = "id", required = false) Integer id, Model model) {
+
+		List<Employees> employees = employeesService.searchEmpById(id);
+		model.addAttribute("employees", employees);
+
+		return "employeeList";
+
+	}
+
+	@GetMapping("/all")
+	@ResponseBody // 單獨在這個方法上使用
+	public List<Employees> getAllEmployees() {
+		return employeesService.getAllEmp();
+	}
+
+}

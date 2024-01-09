@@ -1,0 +1,28 @@
+package tw.taguo.dao;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+import tw.taguo.model.Employees;
+
+
+@Repository
+@Transactional
+public class EmployeesDaoImpl implements EmployeesDao{
+
+	@Override
+	public Employees getById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Employees> searchById() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

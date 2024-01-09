@@ -1,0 +1,73 @@
+package tw.taguo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import tw.taguo.model.Shoe;
+import tw.taguo.service.ShoeService;
+
+@RestController
+@RequestMapping("/shoes")
+public class ShoeController {
+
+	@Autowired
+	private ShoeService shoeService;
+	
+	
+	@GetMapping("{id}")
+	public String getShoeById(@PathVariable Long id, Model model) {
+		Shoe shoe = shoeService.getShoeById(id);
+		model.addAttribute("shoe",shoe);
+		return "shoeDetails";
+	}
+	
+//	@GetMapping("/list")
+//	public String getAllShoes(@PathVariable Model model) {
+//		List<Shoe> shoes = shoeService.getAllShoes();
+//		model.addAttribute("shoes",shoes);
+//		return "shoeList";
+//	}
+	  @GetMapping("/list")
+	    public List<Shoe> getAllShoes() {
+	        return shoeService.getAllShoes();
+	    }
+	@GetMapping("/create")
+	public String showCreateForm(Model model) {
+		
+		model.addAttribute("shoe",new Shoe());
+		return "createShoeForm";
+	}
+	@PostMapping("/create")
+	public String createShoe(@ModelAttribute Shoe shoe) {
+		shoeService.saveShoe(shoe);
+		return "redirect:/shoes/list";
+	}
+	@GetMapping("/edit/{id}")
+	public String showEditForm(@PathVariable Long id,Model model) {
+		Shoe shoe = shoeService.getShoeById(id);
+		model.addAttribute("shoe",shoe);
+		return "editShoeForm";
+	}
+	@PostMapping("/update")
+	public String updateShoe(@ModelAttribute Shoe updateShoe) {
+		shoeService.updateShoe(updateShoe);
+		return"redirect:/shoes/list";
+	}
+	
+	@GetMapping
+	public String searchShoesByName(@RequestParam String name,Model model) {
+		List<Shoe> shoes = shoeService.searcShoesByName(name);
+		model.addAttribute("shoes",shoes);
+		return "shoeList";
+	}
+}

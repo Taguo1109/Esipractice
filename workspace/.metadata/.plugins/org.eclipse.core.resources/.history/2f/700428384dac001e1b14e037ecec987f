@@ -1,0 +1,5 @@
+package tw.taguo.controller;
+
+public class HelloController {
+
+}

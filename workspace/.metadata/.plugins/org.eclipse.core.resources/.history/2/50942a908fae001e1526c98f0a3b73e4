@@ -1,0 +1,45 @@
+package tw.taguo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import tw.taguo.model.Employees;
+import tw.taguo.service.EmployeesService;
+
+@Controller
+@RequestMapping("/employees")
+public class EmployeesController {
+
+	@Autowired
+	private EmployeesService employeesService;
+
+	@GetMapping("/search")
+	public String searchEmployeesById(@RequestParam(value = "id", required = false) Integer id, Model model) {
+
+		   if (id != null) {
+		        List<Employees> employees = employeesService.searchEmpById(id);
+		        model.addAttribute("employees", employees);
+		    } else {
+		        // 如果 id 為空，你可能希望執行一些其他的邏輯，例如顯示錯誤信息或者顯示所有員工列表
+		        List<Employees> allEmployees = employeesService.getAllEmp();
+		        model.addAttribute("employees", allEmployees);
+		    }
+
+		    return "employeeList";
+
+	}
+
+	@GetMapping("/all")
+	@ResponseBody // 單獨在這個方法上使用
+	public List<Employees> getAllEmployees() {
+		return employeesService.getAllEmp();
+	}
+
+}

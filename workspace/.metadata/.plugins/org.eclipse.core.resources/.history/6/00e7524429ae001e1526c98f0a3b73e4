@@ -1,0 +1,27 @@
+package tw.taguo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import tw.taguo.dao.EmployeesDao;
+import tw.taguo.model.Employees;
+
+@Service
+public class EmployeesService {
+	
+	@Autowired
+	private EmployeesDao employeesdao;
+	
+	public Employees getEmpById(int id) {
+		
+		return employeesdao.getById(id);
+	}
+	
+	public List<Employees> searchEmpById(int id){
+		
+		return employeesdao.searchById(id);
+	}
+
+}

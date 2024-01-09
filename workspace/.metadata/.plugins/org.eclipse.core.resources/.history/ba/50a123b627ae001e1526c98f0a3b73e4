@@ -1,0 +1,33 @@
+package tw.taguo.dao;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import tw.taguo.model.Employees;
+
+
+@Repository
+@Transactional
+public class EmployeesDaoImpl implements EmployeesDao{
+	
+	@Autowired
+	private SessionFactory sessionfactory;
+
+	@Override
+	public Employees getById(int id) {
+		// TODO Auto-generated method stub
+		return sessionfactory.getCurrentSession().get(Employees.class,id);
+	}
+
+	@Override
+	public List<Employees> searchById() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

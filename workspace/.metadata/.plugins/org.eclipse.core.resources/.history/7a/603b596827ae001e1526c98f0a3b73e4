@@ -1,0 +1,21 @@
+package tw.taguo.dao;
+
+import java.util.List;
+
+import tw.taguo.model.Employees;
+
+public class EmployeesDaoImpl implements EmployeesDao{
+
+	@Override
+	public Employees getById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Employees> searchById() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

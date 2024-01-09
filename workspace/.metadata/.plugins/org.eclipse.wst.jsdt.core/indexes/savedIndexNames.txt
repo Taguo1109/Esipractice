@@ -1,0 +1,11 @@
+INDEX VERSION 1.4+/Users/taguo/Documents/TechLinkHomeWork/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2710549243.index
+3929553775.index
+3131695492.index
+2577694561.index
+1778080380.index
+1493092040.index
+3750131691.index
+686833542.index
+1547006850.index
+3357884688.index
