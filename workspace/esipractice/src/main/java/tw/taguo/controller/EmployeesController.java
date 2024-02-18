@@ -18,28 +18,30 @@ import tw.taguo.service.EmployeesService;
 public class EmployeesController {
 	@Autowired
 	private EmployeesService employeesService;
-	
+
 	@GetMapping("/search")
 	public String searchEmployeesById(@RequestParam(value = "id", required = false) String id, Model model) {
 
-		 List<Employees> employees;
+		List<Employees> employees;
 
-		    try {
-		        if (id != null && !id.isEmpty()) {
-		            Integer empId = Integer.parseInt(id);
+		try {
+			if (id != null && !id.isEmpty()) {
+				Integer empId = Integer.parseInt(id);
+				
+				employees = employeesService.getSubordinatesRecursive(empId);
+//				Employees employee = employeesService.getEmpById(empId);
+//				employees = (employee != null) ? Collections.singletonList(employee) : Collections.emptyList();
+			} else {
+				employees = employeesService.getAllEmployees();
+			}
 
-		            Employees employee = employeesService.getEmpById(empId);
-		            employees = (employee != null) ? Collections.singletonList(employee) : Collections.emptyList();
-		        } else {
-		            employees = employeesService.getAllEmployees();
-		        }
+			model.addAttribute("employees", employees);
+		} catch (NumberFormatException e) {
+			// 輸入的不是有效的整數，可以在這裡處理錯誤，例如設置一個錯誤消息
+			model.addAttribute("error", "Invalid employee ID format");
+		}
 
-		        model.addAttribute("employees", employees);
-		    } catch (NumberFormatException e) {
-		        // 輸入的不是有效的整數，可以在這裡處理錯誤，例如設置一個錯誤消息
-		        model.addAttribute("error", "Invalid employee ID format");
-		    }
-
-		    return "employeeList";
+		return "employeeList";
 	}
+
 }

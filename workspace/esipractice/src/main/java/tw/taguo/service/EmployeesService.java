@@ -24,4 +24,7 @@ public class EmployeesService {
 	public List<Employees> getAllEmployees(){
 		return employeesDao.getAllEmployees();
 	}
+	public List<Employees> getSubordinatesRecursive(int id){
+		return employeesDao.getSubordinatesRecursive(id);
+	};
 }
